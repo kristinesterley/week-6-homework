@@ -1,0 +1,24 @@
+body {
+	height: 100%;
+}
+* {
+	box-sizing: border-box;
+}
+
+#button {
+	margin:10px;
+}
+
+#breed-form {
+	float: right;
+	margin-right: 20px;
+}
+.container {
+	max-width: 80%;
+	float: left;
+}
+.item {
+	margin: 20px;
+	min-height: 300px;
+	float: left;
+}
