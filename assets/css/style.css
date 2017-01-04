@@ -7,6 +7,7 @@ body {
 
 #button {
 	margin:10px;
+	background-color: #9ebdef;
 }
 
 #breed-form {
@@ -20,5 +21,10 @@ body {
 .item {
 	margin: 20px;
 	min-height: 300px;
-	float: left;
+	float: left;	
+}
+
+#add-breed	{
+	background-color: #9ebdef;
+	
 }

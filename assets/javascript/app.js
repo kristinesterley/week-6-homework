@@ -14,20 +14,24 @@ var app = {
       
         // This line of code will grab the input from the textbox
         var breed = $("#breed-input").val().trim();
+        if (breed !== "") {
 
-        // The movie from the textbox is then added to our array
-        topics.push(breed);
+        	// The movie from the textbox is then added to our array
+        	topics.push(breed);
 
-        // Calling renderButtons which handles the processing of our movie array
-        $("#breed-input").val('');
-        $("#breedButtons").empty();
-        app.renderButtons();
+        	// Calling renderButtons which handles the processing of our movie array
+        	$("#breed-input").val('');
+        	$("#breedButtons").empty();
+        	app.renderButtons();
+    	}//end if
 
 	}, //end addButton
 
 	buttonClicked: function(event) {
 		//display images and ratings
-   
+		//first clear out the display
+        $("#dogDisplay").empty();
+        //create the query string and use ajax to send the search 
     	var selected = $(event.target).data("name"); 
     	var reformatName = app.reformatInput(selected);
     	console.log(reformatName);
@@ -38,9 +42,11 @@ var app = {
           url: queryURL,
           method: "GET"
         })
+      	//display still images that are the results of the search and set the attributes for each image
+      	// i.e., data-state will be still, the images displayed will be the still images and the animaged images
+      	// url is stored in the data-animate attribute for use later
         .done(function(response) {
           var result = response.data;
-          console.log(result);
           for (var i = 0; i < result.length; i++) {
 
             var gifDiv = $("<div class='item'>");
@@ -64,6 +70,9 @@ var app = {
 
   }, //end buttonClicked
 
+  // So here, I created a function for the imageClick event, but $(this) becomes undefined
+  //  - not sure why, so I left the code for this event in the main code section
+
   // imageClicked: function(event) {
 
   // 	var state = $(this).attr("data-state");
@@ -81,6 +90,9 @@ var app = {
 
   // }
 
+
+// reformatInput replaces all spaces in the search term with + and also adds
+// dog to the search so that when you search for boxer, for example, you don't get gifs of people boxing
   reformatInput: function(searchTerm) {
 
   	var res = searchTerm.replace(/ /gi,"+");
@@ -90,6 +102,8 @@ var app = {
 
 
 } //end object app
+
+//begin code execution here
 
 	
 	app.renderButtons();
@@ -104,6 +118,8 @@ var app = {
 
 	$(document).on("click", ".gif", function(e){
 
+		// when image is clicked, switch from still to animate or from animate to still depending on current state
+
   		var state = $(this).attr("data-state");
   		console.log(state);
   	  	if (state === "still"){
@@ -116,6 +132,6 @@ var app = {
         	$(this).attr("src",newSource);
         	$(this).attr("data-state","still");
      	}
-		// app.imageClicked(e);
+		// app.imageClicked(e);  this is the call to the function that did not retain the pointer $(this)
 
 	});
