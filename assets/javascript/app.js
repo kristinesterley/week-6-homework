@@ -35,7 +35,7 @@ var app = {
     	var selected = $(event.target).data("name"); 
     	var reformatName = app.reformatInput(selected);
     	console.log(reformatName);
-      	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
+      	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         reformatName + "&api_key=dc6zaTOxFJmzC&limit=10";
         console.log(queryURL);
       $.ajax({
